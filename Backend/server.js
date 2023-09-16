@@ -1,37 +1,37 @@
-const express = require("express")
-const dotenv = require('dotenv');
-const colors = require('colors');
-const morgan = require('morgan')
-const cors = require('cors');
+const express = require("express");
+const dotenv = require("dotenv");
+const colors = require("colors");
+const morgan = require("morgan");
+const cors = require("cors");
 const connectDB = require("./config/db");
 
-
-dotenv.config()
+dotenv.config();
 
 connectDB();
 
-const app = express()
+const app = express();
 
-app.use(express.json())
-app.use(cors())
-app.use(morgan('dev'))
+app.use(express.json());
+app.use(cors());
+app.use(morgan("dev"));
 
 // app.get("/", (req,res)=>{
 //     res.status(200).json({
 //         message: "Welcome to RedDrop ~ Blood Bank App"
 //     });
 // });
+app.get("/", function (res, req) {
+  res.send("<h1>Hurray! Server is Running !</h1>");
+});
 
-app.use("/api/v1/test" , require("./routes/testroutes"));
+app.use("/api/v1/test", require("./routes/testroutes"));
 app.use("/api/v1/auth", require("./routes/authRoutes"));
-app.use('/api/v1/inventory', require("./routes/inventoryRoutes") );
-app.use('/api/v1/analytics', require("./routes/analyticsRoutes") );
-app.use('/api/v1/admin', require("./routes/adminRoutes") );
-
-
+app.use("/api/v1/inventory", require("./routes/inventoryRoutes"));
+app.use("/api/v1/analytics", require("./routes/analyticsRoutes"));
+app.use("/api/v1/admin", require("./routes/adminRoutes"));
 
 const PORT = process.env.PORT || 8000;
 
-app.listen(PORT, ()=>{
-    console.log(`Node Server Running on Port ${process.env.PORT}`.bgBlue.white);
+app.listen(PORT, () => {
+  console.log(`Node Server Running on Port ${process.env.PORT}`.bgBlue.white);
 });
