@@ -15,13 +15,8 @@ app.use(express.json());
 app.use(cors());
 app.use(morgan("dev"));
 
-// app.get("/", (req,res)=>{
-//     res.status(200).json({
-//         message: "Welcome to RedDrop ~ Blood Bank App"
-//     });
-// });
-app.get("/", function (res, req) {
-  res.send("<h1>Hurray! Server is Running !</h1>");
+app.get("/", (req, res) => {
+  res.send("<h1>Hello bhai</h1>");
 });
 
 app.use("/api/v1/test", require("./routes/testroutes"));
